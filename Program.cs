@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ProductDbContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddTransient<ProductService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -22,13 +23,13 @@ app.MapGet("/v1/products/{id}", async (ProductService service, Guid id) =>
     return product is not null ? Results.Ok(product) : Results.NotFound();
 });
 
-app.MapPost("/v1/products", async (ProductService service, CreateProduct product) =>
+app.MapPost("/v1/products", async (ProductService service, CreateUpdateProduct product) =>
 {
     var resultId = await service.Create(product);
     return Results.Created($"/v1/product/{resultId}", product);
 });
 
-app.MapPut("/v1/products/{id}", async (ProductService service, UpdateProduct product, Guid id) =>
+app.MapPut("/v1/products/{id}", async (ProductService service, CreateUpdateProduct product, Guid id) =>
 {
     await service.Update(product, id);
     return Results.Ok(product);
