@@ -1,5 +1,5 @@
 using EasyShop.Data;
-using EasyShop.Dtos;
+using EasyShop.Models.Dtos;
 using EasyShop.Services;
 using Microsoft.EntityFrameworkCore;
 

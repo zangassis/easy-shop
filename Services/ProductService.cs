@@ -1,6 +1,6 @@
 
 using EasyShop.Data;
-using EasyShop.Dtos;
+using EasyShop.Models.Dtos;
 using EasyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
@@ -35,12 +35,12 @@ public class ProductService
     public async Task<Guid> Create(CreateUpdateProduct productDto)
     {
         var productEntity = new Product(Guid.NewGuid(),
-                                    productDto.name,
-                                    productDto.supplier,
-                                    productDto.category,
-                                    productDto.quantityPerUnit,
-                                    productDto.pricePerUnit,
-                                    productDto.unitsInStock,
+                                    productDto.Name,
+                                    productDto.Supplier,
+                                    productDto.Category,
+                                    productDto.QuantityPerUnit,
+                                    productDto.PricePerUnit,
+                                    productDto.UnitsInStock,
                                     false);
 
         await _db.AddAsync(productEntity);
@@ -51,12 +51,12 @@ public class ProductService
     public async Task Update(CreateUpdateProduct productDto, Guid id)
     {
         var productEntity = await _db.Products.SingleOrDefaultAsync(t => t.Id == id);
-        productEntity.Name = productDto.name;
-        productEntity.Supplier = productDto.supplier;
-        productEntity.Category = productDto.category;
-        productEntity.QuantityPerUnit = productDto.quantityPerUnit;
-        productEntity.PricePerUnit = productDto.pricePerUnit;
-        productEntity.UnitsInStock = productDto.unitsInStock;
+        productEntity.Name = productDto.Name;
+        productEntity.Supplier = productDto.Supplier;
+        productEntity.Category = productDto.Category;
+        productEntity.QuantityPerUnit = productDto.QuantityPerUnit;
+        productEntity.PricePerUnit = productDto.PricePerUnit;
+        productEntity.UnitsInStock = productDto.UnitsInStock;
 
         _db.Update(productEntity);
         await _db.SaveChangesAsync();

@@ -4,7 +4,7 @@ public class Product
 {
     public Product() { }
 
-    public Product(Guid id, string? name, string? supplier, string? category, string? quantityPerUnit, decimal? pricePerUnit, decimal? unitsInStock, bool? discontinued)
+    public Product(Guid id, string? name, string? supplier, string? category, string? quantityPerUnit, decimal? pricePerUnit, decimal? unitsInStock, bool? available)
     {
         Id = id;
         Name = name;
@@ -13,7 +13,7 @@ public class Product
         QuantityPerUnit = quantityPerUnit;
         PricePerUnit = pricePerUnit;
         UnitsInStock = unitsInStock;
-        Discontinued = discontinued;
+        Available = available;
     }
 
     public Guid Id { get; set; }
@@ -23,5 +23,5 @@ public class Product
     public string? QuantityPerUnit { get; set; }
     public decimal? PricePerUnit { get; set; }
     public decimal? UnitsInStock { get; set; }
-    public bool? Discontinued { get; set; }
+    public bool? Available { get; set; }
 }
