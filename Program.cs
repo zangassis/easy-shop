@@ -2,12 +2,15 @@ using EasyShop.Data;
 using EasyShop.Models.Dtos;
 using EasyShop.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ProductDbContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddTransient<ProductService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 
 var app = builder.Build();
 

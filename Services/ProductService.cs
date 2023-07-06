@@ -3,6 +3,7 @@ using EasyShop.Models.Dtos;
 using EasyShop.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Serilog;
 
 namespace EasyShop.Services;
 
@@ -21,6 +22,15 @@ public class ProductService
     {
         var products = await _db.Products.ToListAsync();
         var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products).ToList();
+
+        Log.Logger = new LoggerConfiguration()
+                            .MinimumLevel.Debug()
+                            .WriteTo.Console()
+                            .WriteTo.File("logs/product_service_log.txt", rollingInterval: RollingInterval.Day)
+                            .CreateLogger();
+
+        Log.Information("Total products quantity: {count}", productsDto.Count());
+        Log.CloseAndFlush();
         return productsDto;
     }
 
