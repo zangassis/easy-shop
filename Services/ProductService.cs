@@ -50,7 +50,7 @@ public class ProductService
                                     productDto.QuantityPerUnit,
                                     productDto.PricePerUnit,
                                     productDto.UnitsInStock,
-                                    false);
+                                    productDto.Available);
 
         await _db.AddAsync(productEntity);
         await _db.SaveChangesAsync();

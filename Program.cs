@@ -1,16 +1,16 @@
 using EasyShop.Data;
 using EasyShop.Models.Dtos;
 using EasyShop.Services;
+using EasyShop.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ProductDbContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddTransient<ProductService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
+builder.Services.AddScoped<IValidator<CreateUpdateProduct>, ProductValidator>();
 
 var app = builder.Build();
 
@@ -26,8 +26,13 @@ app.MapGet("/v1/products/{id}", async (ProductService service, Guid id) =>
     return product is not null ? Results.Ok(product) : Results.NotFound();
 });
 
-app.MapPost("/v1/products", async (ProductService service, CreateUpdateProduct product) =>
+app.MapPost("/v1/products", async (ProductService service, CreateUpdateProduct product, IValidator<CreateUpdateProduct> validator) =>
 {
+    var validationResult = validator.Validate(product);
+
+    if (!validationResult.IsValid)
+        return Results.BadRequest(validationResult.Errors);
+
     var resultId = await service.Create(product);
     return Results.Created($"/v1/product/{resultId}", product);
 });
