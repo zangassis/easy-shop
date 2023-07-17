@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyShop.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20230705193503_IntialModel")]
+    [Migration("20230717141301_IntialModel")]
     partial class IntialModel
     {
         /// <inheritdoc />
@@ -54,35 +54,35 @@ namespace EasyShop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eeef3728-4733-4825-b21a-b80a0773b278"),
+                            Id = new Guid("baf743c6-65ad-4f9b-a756-94dc234900d5"),
                             Available = true,
                             Category = "Electronics",
-                            Name = "iPhone 12",
+                            Name = "Wireless Mouse ABX",
                             PricePerUnit = 999.99m,
                             QuantityPerUnit = "1 unit",
-                            Supplier = "Apple",
+                            Supplier = "ABX",
                             UnitsInStock = 100m
                         },
                         new
                         {
-                            Id = new Guid("9494116b-2b85-4d13-9e3e-6c1c08112bcc"),
+                            Id = new Guid("dfe6d01b-5af4-46c4-aa8a-3884cc4fe764"),
                             Available = true,
                             Category = "Electronics",
-                            Name = "Samsung Galaxy S21",
+                            Name = "Computer Monitor FHD 1080P",
                             PricePerUnit = 899.99m,
                             QuantityPerUnit = "1 unit",
-                            Supplier = "Samsung",
+                            Supplier = "NewHD",
                             UnitsInStock = 50m
                         },
                         new
                         {
-                            Id = new Guid("cbf9e4ca-8240-4d36-b4cd-6305ec0d81aa"),
+                            Id = new Guid("46bbb389-0c7d-410b-a728-b227a8153494"),
                             Available = true,
                             Category = "Shoes",
-                            Name = "Nike Air Max 270",
+                            Name = "Athletic Running Tennis Shoes",
                             PricePerUnit = 129.99m,
                             QuantityPerUnit = "1 pair",
-                            Supplier = "Nike",
+                            Supplier = "BestShoes",
                             UnitsInStock = 200m
                         });
                 });
