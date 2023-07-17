@@ -1,3 +1,4 @@
+using System.Reflection;
 using EasyShop.Data;
 using EasyShop.Models.Dtos;
 using EasyShop.Services;
@@ -17,14 +18,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "EasyShop", Description = "EasyShop", Version = "v1" });
-});
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 
+});
+builder.Services.AddControllers();
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "EasyShop V1");
 });
+app.MapControllers();
 
 app.MapGet("/v1/products", async (ProductService service) =>
 {
