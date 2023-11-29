@@ -1,3 +1,13 @@
 namespace EasyShop.Models.Dtos;
 
-public record ProductDto(Guid? Id, string? Name, string? Supplier, string? Category, string? QuantityPerUnit, decimal? PricePerUnit, decimal? UnitsInStock, bool? Available);
+public class ProductDto
+{
+    public Guid? Id { get; set; }
+    public string? Identifier { get; set; }
+    public string? Seller { get; set; }
+    public string? Category { get; set; }
+    public string? QuantityPerUnit { get; set; }
+    public decimal? PricePerUnit { get; set; }
+    public decimal? UnitsInStock { get; set; }
+    public bool? Available { get; set; }
+}

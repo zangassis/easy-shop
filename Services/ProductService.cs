@@ -44,8 +44,8 @@ public class ProductService
     public async Task<Guid> Create(CreateUpdateProduct productDto)
     {
         var productEntity = new Product(Guid.NewGuid(),
-                                    productDto.Name,
-                                    productDto.Supplier,
+                                    productDto.Identifier,
+                                    productDto.Seller,
                                     productDto.Category,
                                     productDto.QuantityPerUnit,
                                     productDto.PricePerUnit,
@@ -60,8 +60,8 @@ public class ProductService
     public async Task Update(CreateUpdateProduct productDto, Guid id)
     {
         var productEntity = await _db.Products.SingleOrDefaultAsync(t => t.Id == id);
-        productEntity.Name = productDto.Name;
-        productEntity.Supplier = productDto.Supplier;
+        productEntity.Name = productDto.Identifier;
+        productEntity.Supplier = productDto.Seller;
         productEntity.Category = productDto.Category;
         productEntity.QuantityPerUnit = productDto.QuantityPerUnit;
         productEntity.PricePerUnit = productDto.PricePerUnit;
